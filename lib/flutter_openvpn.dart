@@ -82,7 +82,6 @@ class FlutterOpenvpn {
       StreamingSharedPreferences sp = StreamingSharedPreferences();
       sp.setPrefsName("flutter_openvpn");
       sp.addObserver(_connectionUpdate, (value) {
-        if (Platform.isIOS) return;
         List<String> values = value.split('_');
         _onConnectionStatusChanged?.call(
             values[0], values[1], values[2], value[3]);
@@ -91,7 +90,6 @@ class FlutterOpenvpn {
         _onProfileStatusChanged?.call(value == '0' ? false : true);
       });
       sp.addObserver(_vpnStatus, (value) {
-        if (Platform.isIOS) return;
         _vpnState = value;
         _onVPNStatusChanged?.call(value);
       });
