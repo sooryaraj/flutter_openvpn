@@ -127,6 +127,13 @@ class FlutterOpenvpn {
 
   static Future<String> _currentCon() async =>
       (await SharedPreferences.getInstance()).getString(_connectionId);
+  static Future<String> getVpnStatus() async {
+    try {
+      return await _channel.invokeMethod<String>("getStatus");
+    } catch (err) {
+      return "";
+    }
+  }
 
   static Future<String> get currentProfileId async {
     List<String> vars = (await _currentCon())?.split('{||}');

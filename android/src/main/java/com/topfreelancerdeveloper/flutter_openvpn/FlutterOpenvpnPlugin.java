@@ -82,6 +82,8 @@ public class FlutterOpenvpnPlugin implements FlutterPlugin, MethodCallHandler, A
         response.put("currentStatus" , OpenVPNService.getStatus());
         response.put("expireAt" , OpenVPNService.getExpireAt());
         result.success(response);
+      } else if (call.method.equals("getStatus")) {
+        result.success(OpenVPNService.getStatus());
       } else if(call.method.equals("lunch")){
         String config = call.argument("ovpnFileContent");
         String expireAt = call.argument("expireAt");
