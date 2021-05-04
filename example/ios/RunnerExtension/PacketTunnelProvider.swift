@@ -119,7 +119,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 if !PacketTunnelProvider.timeOutEnabled || PacketTunnelProvider.connectionIndex != index {
                     return;
                 }
-                UserDefaults.init(suiteName: "YOUR_VPN_GROUP_IDENTIFIER")?.setValue("TIMEOUT", forKey: "vpnStatusGroup")
+                //TODO Set your own groupIdentifier for suit name
+                UserDefaults.init(suiteName: "YOUR_GROUP_IDENTIFIER")?.setValue("TIMEOUT", forKey: "vpnStatusGroup")
                 DispatchQueue.main.asyncAfter(deadline: .now() + Double(1)) {
                 self.stopVPN()
                 }
@@ -140,7 +141,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + Double(stopInSeconds)) {
                 self.stopVPN()
-                UserDefaults.init(suiteName: "YOUR_VPN_GROUP_IDENTIFIER")?.setValue("EXPIRED", forKey: "vpnStatusGroup")
+                //TODO Set your own groupIdentifier for suit name
+                UserDefaults.init(suiteName: "YOUR_GROUP_IDENTIFIER")?.setValue("EXPIRED", forKey: "vpnStatusGroup")
             }
             
             
@@ -206,9 +208,8 @@ extension PacketTunnelProvider: OpenVPNAdapterDelegate {
            toSave += String(openVPNAdapter.transportStatistics.bytesIn)
            toSave+="_"
            toSave += String(openVPNAdapter.transportStatistics.bytesOut)
-           
-           
-           UserDefaults.init(suiteName: "YOUR_VPN_GROUP_IDENTIFIER")?.setValue(toSave, forKey: "connectionUpdate")
+           //TODO Set your own groupIdentifier for suit name
+           UserDefaults.init(suiteName: "YOUR_GROUP_IDENTIFIER")?.setValue(toSave, forKey: "connectionUpdate")
     }
     func _updateEvent(_ event: OpenVPNAdapterEvent) {
         var toSave = ""
@@ -224,7 +225,8 @@ extension PacketTunnelProvider: OpenVPNAdapterDelegate {
         default:
             toSave = "KKKKK"
         }
-        UserDefaults.init(suiteName: "YOUR_VPN_GROUP_IDENTIFIER")?.setValue(toSave, forKey: "vpnStatusGroup")
+        //TODO Set your own groupIdentifier for suit name
+        UserDefaults.init(suiteName: "YOUR_GROUP_IDENTIFIER")?.setValue(toSave, forKey: "vpnStatusGroup")
     }
     
     // Process events returned by the OpenVPN library

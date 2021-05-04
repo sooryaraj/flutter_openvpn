@@ -11,20 +11,20 @@ void main() {
 class MyApp extends StatefulWidget {
   static Future<void> initPlatformState() async {
     await FlutterOpenvpn.lunchVpn(
-      '''
+      ovpnFileContents: '''
 
       ''',
-      (isProfileLoaded) {
+      onProfileStatusChanged: (isProfileLoaded) {
         print('isProfileLoaded : $isProfileLoaded');
       },
-      (vpnActivated) {
+      onVPNStatusChanged: (vpnActivated) {
         print('vpnActivated : $vpnActivated');
       },
       user: '',
       pass: '',
       onConnectionStatusChanged:
-          (duration, lastPacketRecieve, byteIn, byteOut) =>
-              print('BYEIN : $byteIn'),
+          (duration, lastPacketReceive, byteIn, byteOut) =>
+              print('BYTE IN : $byteIn'),
       connectionId: "superman",
       connectionName: "xxx",
       timeOut: Duration(seconds: 5),
